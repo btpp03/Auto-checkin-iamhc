@@ -31,6 +31,7 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
         run: python checkin.py
 
       - name: clear old run jobs
