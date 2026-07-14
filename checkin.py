@@ -9,6 +9,7 @@ EMAIL         = os.environ.get("EMAIL") or ""
 PASSWORD      = os.environ.get("PASSWORD") or ""
 TG_CHAT_ID    = os.environ.get("TG_CHAT_ID") or ""
 TG_BOT_TOKEN  = os.environ.get("TG_BOT_TOKEN") or ""
+PROXY_SERVER = os.environ.get("PROXY_SERVER") or ""  # socks5://host:port, 留空直连
 
 BASE_URL      = "https://api.hcnsec.cn"
 QUOTA_PER_UNIT = 500000 # new-api 默认额度换算比例：500000 quota = 1$
@@ -122,6 +123,9 @@ def main():
         sys.exit(1)
 
     session = requests.Session()
+    if PROXY_SERVER:
+        session.proxies.update({"http": PROXY_SERVER, "https": PROXY_SERVER})
+        print(f"🔌 使用代理: {PROXY_SERVER}")
 
     # 登录
     user = login(session)
